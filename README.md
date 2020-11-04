@@ -4,5 +4,7 @@ This is a data science project for demand analysis of items in stores. The data 
 
 I have used correlation analysis and SARIMA models for the purpose of modeling and forecasting the time series data.
 
-# Exploring the dataset.
+# Exploring the dataset
+This part is carried out [here](https://github.com/Aviator16/Store-Item-Demand-analysis/tree/main/Dataset%20Exploration).
+We find that the dataset has 10 stores and 50 items and sales of all combinations of these need to forecasted for this project.
 
