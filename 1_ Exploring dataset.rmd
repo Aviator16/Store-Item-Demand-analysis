@@ -1,0 +1,50 @@
+---
+title: "Exploring the dataset"
+output: html_notebook
+---
+
+We shall explore our data set which has been obtained from [Store Item demand forecasting challenge-Kaggle](https://www.kaggle.com/c/demand-forecasting-kernels-only/data). We use the train data only for the purpose of this project.
+
+```{r}
+setwd("/media/aviator/Everything/Projects/Demand Analysis/Dataset")
+dem_data=read.csv("train.csv")
+head(dem_data)
+
+```
+
+We have columns date, store, item and sales. The date column is stored in factor data type format. The store, item and sales column are in int data type format.
+
+```{r}
+library(lubridate)
+dem_data$date=ymd(dem_data$date)
+unique(format(dem_data$date,'%Y'))
+unique(format(dem_data$date,'%m'))
+unique(dem_data$store)
+unique(dem_data$item)
+```
+
+Thus we can see that our **Date** ranges from the year 2013 to the year 2017. We have data for all the months of those years. The **Stores** range from 1 to 10 and **Items** range from 1 to 50.
+
+This is a forecasting challenge so we take years **2013 to 2016** as our train data and the **first 3 months of 2017** as our test dataset.
+
+We are required to forecast the sales for any given store and any given item on a date from our test dataset. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
