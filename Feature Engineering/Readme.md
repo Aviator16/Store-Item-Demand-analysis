@@ -20,3 +20,5 @@ First we filter out the sales of each item in all the stores.
  After all these calculations we find the combinations where the correlation is high(>0.85).
  
  **The reason we do this is because if for store 1 item 2 and 3 have high correlation I only need to forecast sales of any one and use it for the other. Similarly if for item 5 store 7 and 8 have high correlation I forecast sales for any one of them and use it as an approximation for the other. If this hypothesis comes true for tens of thousands of store-item combinations forecasting on a few thousand may be enough which reduces the workload many fold.**
+
+# Feature Engineering
