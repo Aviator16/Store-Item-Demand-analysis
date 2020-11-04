@@ -22,3 +22,14 @@ First we filter out the sales of each item in all the stores.
  **The reason we do this is because if for store 1 item 2 and 3 have high correlation I only need to forecast sales of any one and use it for the other. Similarly if for item 5 store 7 and 8 have high correlation I forecast sales for any one of them and use it as an approximation for the other. If this hypothesis comes true for tens of thousands of store-item combinations forecasting on a few thousand may be enough which reduces the workload many fold.**
 
 # Feature Engineering
+
+Now we have the dataframe which give us the correlation between sales in all stores for each item.
+![pic7](https://raw.githubusercontent.com/Aviator16/Store-Item-Demand-analysis/main/Images/1%20NB3.png)
+
+We can see that function head shows us the first few highly correlated stores for item 13. For eg. store 2 and store 3 has correlation 0.85536 for item 13. So we can take item 13 and store 2 sales and use its forecasted values for item 13 and store 3 as well if our hypothesis is corrrect.
+
+Similarly we have the dataframe which give us the correlation between sales of all items for each store.
+![pic8](https://raw.githubusercontent.com/Aviator16/Store-Item-Demand-analysis/main/Images/2%20NB3.png)
+
+For store 2 we have high correlation between items 8 and 13 of 0.85137.
+
