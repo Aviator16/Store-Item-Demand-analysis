@@ -31,5 +31,16 @@ We can see that function head shows us the first few highly correlated stores fo
 Similarly we have the dataframe which give us the correlation between sales of all items for each store.
 ![pic8](https://raw.githubusercontent.com/Aviator16/Store-Item-Demand-analysis/main/Images/2%20NB3.png)
 
-For store 2 we have high correlation between items 8 and 13 of 0.85137.
+For eg. for store 2 we have high correlation between items 8 and 13 of 0.85137.
 
+### Creating final training sets ###
+Finally we goo through the correlations and pick one combination among two highly correlated ones. In case of collisions like, for item 1 stores 2 and 3 have high corr. so possible comb. are i1s2 and i1s3. But say, for store 3 items 1 and 4 have high corr. in whcih case possible comb. are i1s3 and i4s3. **Hence in this case the comb. i1s3 can be approximated by both i1s2 and i4s3 and we pick the one with whom i1s3 has a higher correlation with.**
+
+This way we end up with two dataframes:
+* One with all the combinations which need to be modeled and forecasted for future sales.
+* Another one with the data of the combinations which can be approximated from the forecasts of the first frame.
+![pic9](https://raw.githubusercontent.com/Aviator16/Store-Item-Demand-analysis/main/Images/3%20NB3.png)
+
+**The first row means that the sales in store 2 of item 13 can be approximated by the sales in store 2 of item 11.**
+
+We now need to forecast and see the accuracy of our forecast and then approximate the sales of the combinations in our replace frame and see if our hypothesis holds true.
