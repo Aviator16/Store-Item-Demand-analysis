@@ -5,3 +5,4 @@ This is a data science project for demand analysis of items in stores. The data 
 I have used correlation analysis and SARIMA models for the purpose of modeling and forecasting the time series data.
 
 # Exploring the dataset.
+
