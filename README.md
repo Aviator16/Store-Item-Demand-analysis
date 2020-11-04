@@ -16,3 +16,8 @@ Suppose store 1 and store 2 are in Agra and store 3 is in Kolkata. Let item 1 be
 Hence the **objectives** are as follows:
 * Forecasting future sale values for each store-item combination.
 * Finding high correlation combinations between stores for a given item and items for a given store, and checking if using any one among two highly correlated combinations for forecasting and approximating the other using that provides us with accurate predictions. 
+
+## Feature engineering
+In this part we carry out analysis on our features and see if reduction in the number of combinations is possible [here](https://github.com/Aviator16/Store-Item-Demand-analysis/tree/main/Feature%20Engineering).
+
+At the conslusion of this portion we obtain two dataframes on which we will model our time series models and forecast on. We take data till 2016 as training set and data from the year 2017 as test set.
