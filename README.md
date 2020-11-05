@@ -34,3 +34,17 @@ Here we consider one store-item combination and try to fit its sales to a SARIMA
 
 #### Conclusion
 Model with lowest AIC gave very low RMSE,MAPE and MAE score which proves the fitting to be a success.
+
+# Forecasting
+The forcasting part is well explained in [here](https://github.com/Aviator16/Store-Item-Demand-analysis/tree/main/Forecasting).
+
+Unlike Classification, Time Series Forecasting requires us to give approximate values of our target variable which in this case is sales. The lesser deviaton we have from the true values, the better our modeling and forecast is.
+
+Over here we did the follwoing two things:
+* Firstly we forecasted sales figures for all items in all stores for the first 3 months of 2017 and our resultant Error Scores were very low. **This fulfilled our first objective**.
+* Secondly we took out some combinations of stores and items and approximated them using other store-item combinations. Then we compared them with the sales of the original combinations we omited and observed the Error scores. They came out to be very low as well. **Hence we fulfilled our second objective as well**.
+
+# Conclusion
+I was able to achieve both my objectives in this project. This goes to show that
+* firstly, SARIMA modeling can be used for forecasting sales in industrial problems.
+* secondly, when we have many stores and items say 1000 stores and 50,000 items, we need not model for each combination of items in each of the stores since many of those combinations will be highly correlated. So we need to model any one among them and approximating the other from it will give us an accurate enough information about future sales.
