@@ -21,6 +21,7 @@ For example,in row 1 of replace_frame, the sales in **store 2 of iem 13** is app
 
 In the end the results of our approximation comes to be satisfactory:
 ![pic2](https://raw.githubusercontent.com/Aviator16/Store-Item-Demand-analysis/main/Images/2%20NB5.png)
+
 which are very close to our errors while using original dataset.
 
 ## This concludes my project with success.
