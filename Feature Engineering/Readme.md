@@ -37,8 +37,8 @@ For eg. for store 2 we have high correlation between items 8 and 13 of 0.85137.
 Finally we goo through the correlations and pick one combination among two highly correlated ones. In case of collisions like, for item 1 stores 2 and 3 have high corr. so possible comb. are i1s2 and i1s3. But say, for store 3 items 1 and 4 have high corr. in whcih case possible comb. are i1s3 and i4s3. **Hence in this case the comb. i1s3 can be approximated by both i1s2 and i4s3 and we pick the one with whom i1s3 has a higher correlation with.**
 
 This way we end up with two dataframes:
-* One with all the combinations which need to be modeled and forecasted for future sales.
-* Another one with the data of the combinations which can be approximated from the forecasts of the first frame.
+* One with all the combinations which need to be modeled and forecasted for future sales, i.e. [this](https://raw.githubusercontent.com/Aviator16/Store-Item-Demand-analysis/main/Feature%20Engineering/final_dataset_no2017.csv).
+* Another one with the data of the combinations which can be approximated from the forecasts of the first frame, i.e. [this](https://github.com/Aviator16/Store-Item-Demand-analysis/blob/main/Feature%20Engineering/replace_frame_no2017.csv).
 ![pic9](https://raw.githubusercontent.com/Aviator16/Store-Item-Demand-analysis/main/Images/3%20NB3.png)
 
 **The first row means that the sales in store 2 of item 13 can be approximated by the sales in store 2 of item 11.**
