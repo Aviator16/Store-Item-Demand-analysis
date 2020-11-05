@@ -20,4 +20,16 @@ Hence the **objectives** are as follows:
 ## Feature engineering
 In this part we carry out analysis on our features and see if reduction in the number of combinations is possible [here](https://github.com/Aviator16/Store-Item-Demand-analysis/tree/main/Feature%20Engineering).
 
-At the conslusion of this portion we obtain two dataframes on which we will model our time series models and forecast on. We take data till 2016 as training set and data from the year 2017 as test set.
+At the conslusion of this portion we obtain two dataframes on which we will model our time series models and forecast on. We take data till 2016 as training set and data of the first 3 months (90 days) from the year 2017 as test set.
+
+## Time Series Modeling
+Here we consider one store-item combination and try to fit its sales to a SARIMA model so that we can forecast its future values. At this stage, we run these [programs](https://github.com/Aviator16/Store-Item-Demand-analysis/tree/main/Time%20Series%20Modeling) and try to do the following:
+* Plot the sales as Time Series data.
+* Apply suitable transformations to make it suitable to be fit into a SARIMA model like log transformation and differencing.
+* Observe the ACF and PACF plots to ascertain the seasonal and non-seasonal moving average and auto-regressive terms.
+* Try multiple models to find the ones with lowest AIC and SSE.
+* Fit the data to the model with the lowest AIC and check the error in forecast.
+* Repeat for a few more sample combinations.
+
+#### Conclusion
+Model with lowest AIC gave very low RMSE,MAPE and MAE score which proves the fitting to be a success.
