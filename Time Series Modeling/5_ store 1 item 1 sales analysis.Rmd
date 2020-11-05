@@ -1,0 +1,111 @@
+---
+title: "Time series Analysis"
+output: rmarkdown::github_document
+---
+
+Let us take a particular combination and analyze its sales.
+For this purpose we first consider sales in store 1 of item 1.
+
+```{r}
+#Time series analysis
+setwd("/media/aviator/Everything/Projects/Demand Analysis/Dataset")
+dem_data=read.csv("train.csv")
+
+library(lubridate)
+dem_data$date=ymd(dem_data$date)
+
+library(dplyr)
+s1.i1=ts(filter(dem_data,(item==1 & store==1))$sales)
+plot(s1.i1,main="sales of store 1 item 1",ylab="sales",col='blue',lw=3)
+
+
+```
+
+We  can see that the sale value ranges from about 2 to about 50. There is a very slow upward trend with time. There is a definite seasonality.
+Let us now apply logarithmic transformation on the data to reduce its variance.
+
+```{r}
+#log transforming the time series to reduce variance
+logd=log(s1.i1)  #without this step, values at ranged from -30 to 20, but now it ranges from 1.5 to 4.
+plot(logd,main="log transformed data",ylab = "log of sales",col='blue',lw=2)
+acf(logd,lag.max=50,main="ACF of log transformed data")
+pacf(logd,lag.max=80,main="PACF of log transformed data")
+
+```
+
+After log transformation the data ranges from about 1.5 to 4. By looking at the ACF and PACF of the log data we can clearly see a seasonality at lag 7; i.e. seasonality of a period of week. PACF at lag 7 is much greater than seasonality at lag 1 hence we are not required to do non-seasonal differencing but only seasonal differencing at lag 7.
+
+```{r}
+final=diff(logd,7)
+plot(final,main="log data, diff at intv 7",ylab = "log sales",col='blue')
+
+```
+The plot shows no visible trend. There are spikes in sales at different time points but they are more likely to be outliers than an indication of high variance.
+
+```{r}
+final=na.omit(final)
+t1=decompose(ts(final,frequency = 7))
+plot(t1$trend,main ="trend of final data" )
+```
+Decomposing the time series and looking at its trend also shows no visibly traceable trend in the data.
+
+Now we shall look at the ACF and PACF plots to ascertain the parameters of our SARIMA model.
+```{r}
+acf(final,lag.max=50,main="ACF of seasonally differenced log data at interval 7")
+pacf(final,lag.max=80,main="PACF of seasonally differenced log data at interval 7")
+
+```
+
+Since the ACF is slightly significant at lag 1 we may consider a non-seasonal moving average value of 0 or 1. Our seasonal moving average evidently value has to be 1 with period 7.
+The PACF suggests a non-seasonal auto-regressive value of 1 since it is significant at lag 1 and then for about 9 periods of lag 7 we see spike in PACF suggesting a seasonal auto-regressive term ranging from 1 to 9.
+
+
+Now let us perform Ljung-Box test to test stationarity of our final data.
+```{r}
+Box.test(final,log(length(final)))
+```
+The p-value is evidently much lower than alpha= 0.05 or alpha= 0.1 so the null hypothesis of 0 partial correlation coefficients (i.e. time series being stationary) is rejected.
+Thus now we apply SARIMA model to our data.
+
+```{r}
+#trying different models
+d=0
+DD=1
+aic=100000; ss=100000; order.1=NULL; order.2=NULL;
+per=7
+
+#value of p causing error. Look into variations for P.
+#model failing whenever p>1.
+
+for(p in 1:3){
+  for(q in 1:3){
+    for(i in 2:8){
+      for(j in 2:3){
+        if(p+d+q+i+DD+j<=19){
+          model<-try(arima(x=logd, order = c((p-1),d,(q-1)), seasonal = list(order=c((i-1),DD,(j-1)), period=per)))
+          if(class(model)=="try-error"){next()}
+          pval<-Box.test(model$residuals, lag=log(length(model$residuals)))
+          sse<-sum(model$residuals^2)
+          cat(p-1,d,q-1,i-1,DD,j-1,per, 'AIC=', model$aic, ' SSE=',sse,' p-VALUE=', pval$p.value,'\n')
+          if (model$aic<aic){
+            aic=model$aic
+            order.1=c((p-1),d,(q-1),(i-1),DD,(j-1))
+          }
+          if (sse<ss){
+            ss=sse
+            order.2=c((p-1),d,(q-1),(i-1),DD,(j-1))
+          }
+        }
+      }
+    }
+  }
+}
+
+
+paste("Order with lowest aic is",list(order.1),"with aic value",aic)
+paste("Order with lowest sse is",list(order.2),"with sse value",ss)
+
+```
+We see that to model the sales of item1 in store 1, the model with the lowest aic value of 234.6874 is SARIMA(1,0,1,1,1,1,7).
+We see that to model the sales of item1 in store 1, the model with the lowest sse value of 117.7167743 is SARIMA(2,0,2,5,1,2,7).
+
