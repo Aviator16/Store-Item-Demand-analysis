@@ -2,7 +2,7 @@
 First we filter out the sales of each item in all the stores.
  ![pic1](https://raw.githubusercontent.com/Aviator16/Store-Item-Demand-analysis/main/Images/1%20NB2.png)
  
- Then we find the correlattions between the sales in these stores for a particular item.
+ Then we find the correlations between the sales in these stores for a particular item.
  ![pic2](https://raw.githubusercontent.com/Aviator16/Store-Item-Demand-analysis/main/Images/2%20NB2.png)
  
  This can be visualized as
@@ -34,7 +34,7 @@ Similarly we have the dataframe which give us the correlation between sales of a
 For eg. for store 2 we have high correlation between items 8 and 13 of 0.85137.
 
 ### Creating final training sets ###
-Finally we goo through the correlations and pick one combination among two highly correlated ones. In case of collisions like, for item 1 stores 2 and 3 have high corr. so possible comb. are i1s2 and i1s3. But say, for store 3 items 1 and 4 have high corr. in whcih case possible comb. are i1s3 and i4s3. **Hence in this case the comb. i1s3 can be approximated by both i1s2 and i4s3 and we pick the one with whom i1s3 has a higher correlation with.**
+Finally we go through the correlations and pick one combination among two highly correlated ones. In case of collisions like, for item 1 stores 2 and 3 have high corr. so possible comb. are i1s2 and i1s3. But say, for store 3 items 1 and 4 have high corr. in whcih case possible comb. are i1s3 and i4s3. **Hence in this case the comb. i1s3 can be approximated by both i1s2 and i4s3 and we pick the one with whom i1s3 has a higher correlation with.**
 
 This way we end up with two dataframes:
 * One with all the combinations which need to be modeled and forecasted for future sales, i.e. [this](https://raw.githubusercontent.com/Aviator16/Store-Item-Demand-analysis/main/Feature%20Engineering/final_dataset_no2017.csv).
